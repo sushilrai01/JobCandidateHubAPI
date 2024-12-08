@@ -1,4 +1,5 @@
 using JobCandidateHubAPI.Entity;
+using JobCandidateHubAPI.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,6 +12,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<JobCandidateHubDbContext>(options =>
     options.UseSqlServer("name=ConnectionStrings:DefaultConnection"));
+
+builder.Services.AddScoped<ICreateUpdateCandidate, CreateUpdateCandidateService>();
 
 var app = builder.Build();
 
