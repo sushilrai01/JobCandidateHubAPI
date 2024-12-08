@@ -21,7 +21,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="CommonHelper\" />
     <Folder Include="Entity\" />
   </ItemGroup>
 

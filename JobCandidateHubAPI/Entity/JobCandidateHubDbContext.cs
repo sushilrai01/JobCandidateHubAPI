@@ -15,7 +15,7 @@ public partial class JobCandidateHubDbContext : DbContext
     {
     }
 
-    public virtual DbSet<TblCandidate> TblCandidates { get; set; }
+    public virtual DbSet<TblCandidate> TblCandidates { get; set; }  
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
