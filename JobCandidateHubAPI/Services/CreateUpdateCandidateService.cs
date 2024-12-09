@@ -16,14 +16,11 @@ namespace JobCandidateHubAPI.Services
         {
             await using var context = new JobCandidateHubDbContext(_dbOptions.ConOptions);
 
-            var newGuid = Guid.NewGuid();
-
-            var candidates =  await context.TblCandidates.Where(x =>
+            var candidates = await context.TblCandidates.Where(x =>
                 x.EmailAddress.Trim().ToLower() == model.EmailAddress.Trim().ToLower()).FirstOrDefaultAsync();
 
             if (candidates != null)
             {
-                newGuid = candidates.Id;
                 candidates.FirstName = model.FirstName;
                 candidates.LastName = model.LastName;
                 candidates.EmailAddress = model.EmailAddress;
@@ -32,28 +29,29 @@ namespace JobCandidateHubAPI.Services
                 candidates.GithubUrl = model.GithubUrl;
                 candidates.LinkedInUrl = model.LinkedInUrl;
                 candidates.PhoneNo = model.PhoneNo;
+
+                await context.SaveChangesAsync();
+                return candidates.Id;
             }
-            else
+
+            var candidate = new TblCandidate()
             {
-                var candidate = new TblCandidate()
-                {
-                    Id = newGuid,
-                    FirstName = model.FirstName,
-                    LastName = model.LastName,
-                    EmailAddress = model.EmailAddress,
-                    CallTimeInterval = model.CallTimeInterval,
-                    Comment = model.Comment,
-                    GithubUrl = model.GithubUrl,
-                    LinkedInUrl = model.LinkedInUrl,
-                    PhoneNo = model.PhoneNo,
-                };
+                Id = Guid.NewGuid(),
+                FirstName = model.FirstName,
+                LastName = model.LastName,
+                EmailAddress = model.EmailAddress,
+                CallTimeInterval = model.CallTimeInterval,
+                Comment = model.Comment,
+                GithubUrl = model.GithubUrl,
+                LinkedInUrl = model.LinkedInUrl,
+                PhoneNo = model.PhoneNo,
+            };
 
-                context.TblCandidates.Add(candidate);
-            }
-
+            context.TblCandidates.Add(candidate);
             await context.SaveChangesAsync();
+            return candidate.Id;
 
-            return newGuid;
+
         }
     }
 }
