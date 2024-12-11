@@ -6,7 +6,7 @@ namespace JobCandidateHubAPI.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class JobCandidateController(ICreateUpdateCandidate _candidateService) : ControllerBase
+    public class JobCandidateController(ICandidateService _candidateService) : ControllerBase
     {
 
         [HttpPost("CreateUpdateCandidate")] // ?name=test&

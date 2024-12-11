@@ -2,7 +2,7 @@
 
 namespace JobCandidateHubAPI.Services
 {
-    public interface ICreateUpdateCandidate
+    public interface ICandidateService
     {
         Task<Guid> CreateUpdateCandidateInfo(CandidateInfoModel model);
     }

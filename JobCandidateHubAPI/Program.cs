@@ -17,7 +17,7 @@ builder.Services.AddDbContext<JobCandidateHubDbContext>(options =>
 
 builder.Services.AddTransient<IDbOptions, DbOptions>();
 
-builder.Services.AddScoped<ICreateUpdateCandidate, CreateUpdateCandidateService>();
+builder.Services.AddScoped<ICandidateService, CandidateService>();
 
 var app = builder.Build();
 

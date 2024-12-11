@@ -5,10 +5,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace JobCandidateHubAPI.Services
 {
-    public class CreateUpdateCandidateService : ICreateUpdateCandidate
+    public class CandidateService : ICandidateService
     {
         public IDbOptions _dbOptions;
-        public CreateUpdateCandidateService(IDbOptions dboptions)
+        public CandidateService(IDbOptions dboptions)
         {
             _dbOptions = dboptions;
         }
